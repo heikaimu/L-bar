@@ -47,8 +47,6 @@ server->server.js中修改"res.header("Access-Control-Allow-Origin", "http://192
 ![](https://github.com/heikaimu/L-bar/raw/master/show/12.png)
 ![](https://github.com/heikaimu/L-bar/raw/master/show/13.png)
 
-* 消息页面
-
 ## 今后发展
 
 新消息提醒
