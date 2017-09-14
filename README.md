@@ -33,6 +33,18 @@ server->server.js中修改"res.header("Access-Control-Allow-Origin", "http://192
 
 ## 截图
 ![](https://github.com/heikaimu/L-bar/raw/master/show/1.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/2.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/3.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/4.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/5.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/6.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/7.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/8.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/9.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/10.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/11.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/12.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/13.png)
 
 * 消息页面
 
