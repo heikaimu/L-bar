@@ -4,7 +4,7 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 
 ## 预览
 
-由于在开发期间没有部署在服务器上。可以查看视频显示地址：http://ow99hkq6k.bkt.clouddn.com/%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.gif
+由于在开发期间没有部署在服务器上。可以查看视频演示地址：http://ow99hkq6k.bkt.clouddn.com/%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.gif
 
 ## 技术栈
 * **Vue2.0**：实现前端页面构建
