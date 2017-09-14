@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.item{
+			width: 200px;
+			height: 200px;
+			padding: 10px;
+			border: 1px solid #ddd;
+			float: left;
+			margin: 10px;
+			position: relative;
+		}
+		.item img{
+			width: 100%;
+		}
+		.item label{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 1;
+		}
+		.item input{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="img_upload_wrapper">
+		<div class="item">
+			<label for="img_upload_btn">
+				<input type="file" name="img" id="img_upload_btn">
+				点我
+			</label>
+		</div>
+	</div>
+	<div class=""><button onclick="submit()">提交</button></div>
+</body>
+<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+	var file = $("#img_upload_btn");
+	file.change(function() {
+		setTimeout(function() {
+			var formData = new FormData();
+			formData.append('img', file[0].files[0]);
+			$.ajax({
+				url: 'http://localhost:6060/imgUpload',
+				type: 'POST',
+				data: formData,
+				async: false,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(returnData) {
+					$("#img_upload_wrapper").prepend('<div class="item"><img src="'+returnData.body.img_src+'"/></div>');
+				}
+			});
+		}, 50)
+	})
+
+	submit = function() {
+		var str = '';
+		$("#img_upload_wrapper").find('img').each(function() {
+			var _this = $(this);
+			str += '<img src="'+_this.attr('src')+'"/>'
+		});
+		console.log(str)
+	}
+
+
+</script>
+</html>

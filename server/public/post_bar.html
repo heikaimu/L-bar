@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>帖子</title>
+	<style type="text/css">
+		.item{
+			border: 1px solid #e7e7e7;
+			margin-bottom: 10px;
+		}
+		.head{
+			display: flex;
+			justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div class="head">
+		<h2>分类：游戏</h2>
+		<div class="user-box">
+			<div class="unlogin">
+				<a href="./login.html">登录</a>
+				<a href="./register.html">注册</a>
+			</div>
+			<div class="login">
+				<p id="user_name">用户名</p>
+				<button onclick="logout()">注销</button>
+				<a href="./update.html">编辑资料</a>
+			</div>
+		</div>
+	</div>
+	<div>
+		<h1>帖子列表</h1>
+		<div id="post_bar">
+
+		</div>
+	</div>
+	<div>
+		<h1>发帖</h1>
+		<div>
+			标题：<input type="text" name="acount" id="desc">
+		</div>
+		<div>
+			详情：<textarea id="details"></textarea>
+		</div>
+		<div>
+			<button onclick="publish()">提交</button>
+		</div>
+	</div>
+	<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" >
+		var url = location.href;
+		var themeID = url.split('theme_id=')[1];
+		// 当前用户
+		function currentUser() {
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/user/currentUser',
+				success: function(returnData) {
+					console.log(returnData)
+					if (returnData.OK) {
+						$('#user_name').text(returnData.body.nickname !== "" ? returnData.body.nickname : returnData.body.acount);
+						$(".unlogin").hide();
+					} else {
+						$('#user_name').text("");
+						$(".login").hide();
+					};
+				}
+			});
+		}
+		currentUser();
+		// 帖子列表
+		function postBarList() {
+			$.ajax({
+				type: 'get',
+				url: 'http://localhost:6060/postBar/list?id='+themeID,
+				success: function(returnData) {
+					if (returnData.OK) {
+						var str = '';
+						$.each(returnData.body, (i, e) => {
+							str += '<a href="./details.html?post_bar_id='+e.ID+'">'
+							str += '<div class="item">';
+							str += '<h3>'+e.desc+'</h3>';
+							str += '<p>'+e.details+'</p>';
+							str += '<i>'+e.add_time+'</i>';
+							str += '</div></a>';
+						});
+						$("#post_bar").append(str);
+					}
+				}
+			});
+		}
+		postBarList();
+		// 发帖
+		function publish() {
+			var formData = new FormData();
+			var desc = $("#desc").val();
+			var details = $("#details").val();
+			formData.append('desc', desc);
+			formData.append('details', details);
+			formData.append('themeID', themeID);
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/postBar/publish',
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(returnData) {
+					if (returnData.OK) {
+						alert(returnData.msg);
+					} else {
+						alert(returnData.msg)
+					}
+				}
+			});
+		}
+		// 注销
+		function logout() {
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/user/logout',
+				success: function(returnData) {
+					if (returnData.OK) {
+						alert(returnData.msg);
+					};
+				}
+			});
+		}
+	</script>
+</body>
+</html>

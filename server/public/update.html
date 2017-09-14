@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	.item{
+		border: 1px solid #ddd;
+		padding: 20px;
+		margin: 20px;
+	}
+	</style>
+</head>
+<body>
+	<h2>修改个人资料</h2>
+	<div class="item">
+		头像： <input type="file" name="" id="head_thumb">
+		<button onclick="uploadHeadThumb()">上传头像</button>
+	</div>
+	<div class="item">
+		昵称： <input type="text" name="" id="nickname">
+		<button onclick="updateIfo()">保存资料</button>
+	</div>
+	<div class="item">
+		原始密码： <input type="password" name="" id="old_pass"><br>
+		新　密码： <input type="password" name="" id="new_pass"><br>
+		<button onclick="changePassword()">修改密码</button>
+	</div>
+	<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 上传头像
+		function uploadHeadThumb() {
+			let json = {
+				headThumb: $("#head_thumb").val()
+			}
+		}
+
+		// 完善资料
+		function updateIfo() {
+			let json = {
+				nickname: $("#nickname").val()
+			}
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:8080/user/updateIfo',
+				data: json,
+				success: function(returnData) {
+					if (returnData.OK) {
+						alert(returnData.msg);
+					} else {
+						alert('修改失败');
+					}
+				}
+			});
+		}
+
+		// 完善资料
+		function changePassword() {
+			let json = {
+				oldPass: $("#old_pass").val(),
+				newPass: $("#new_pass").val()
+			}
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:8080/user/changePassword',
+				data: json,
+				success: function(returnData) {
+					if (returnData.OK) {
+						alert(returnData.msg);
+					} else {
+						alert('修改失败');
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		body{
+			padding-bottom: 300px;
+		}
+		#theme a{
+			display: inherit;
+			margin: 20px;
+		}
+		.reply-box{
+			width: 100%;
+			height: 200px;
+			position: fixed;
+			bottom: 0;
+			background: #e7e7e7;
+		}
+		.reply-box textarea{
+			width: 100%;
+			height: 100px;
+			font-size: 20px;
+		}
+		.reply-box button{
+			font-size: 20px;
+			padding: 10px 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="user_box">
+		<h3 id="name"></h3>
+	</div>
+	<div id="details_box">
+		<h3 id="desc"></h3>
+		<p id="details"></p>
+		<p id="add_time"></p>
+	</div>
+
+	<div id="reply_box">
+		<h2>回复列表</h2>
+		<ul id="reply_wrapper">
+
+		</ul>
+	</div>
+
+	<div class="reply-box">
+		<textarea id="reply"></textarea>
+		<button onclick="reply()">回复</button>
+	</div>
+
+	<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" >
+		var url = location.href;
+		var postBarID = url.split('post_bar_id=')[1];
+		function theme() {
+			const json = {
+				postBarID: postBarID
+			}
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/postBar/details',
+				data: json,
+				success: function(returnData) {
+					if (returnData.OK) {
+						$("#name").text("作者：" + returnData.body.acount);
+						$("#desc").text(returnData.body.desc);
+						$("#details").html(returnData.body.details);
+						$("#add_time").text(returnData.body.add_time);
+					}
+				}
+			});
+		}
+		theme();
+
+		function reply() {
+			var reply = $("#reply").val();
+			const json = {
+				reply: reply,
+				postBarID: postBarID
+			}
+			console.log(json)
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/reply/publish',
+				data: json,
+				success: function(returnData) {
+					console.log(returnData)
+				}
+			});
+		}
+
+		function replyList() {
+			const json = {
+				postBarID: postBarID
+			}
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/reply/list',
+				data: json,
+				success: function(returnData) {
+					if (returnData.OK) {
+						console.log(returnData)
+						var str = '';
+						$.each(returnData.body, (i, e)=> {
+							str += '<li>';
+							str += '<p>层主：'+e.acount+'</p>';
+							str += '<p>楼层：'+e.ID+'</p>';
+							str += '<p>内容：'+e.details+'</p>';
+							str += '<p>发布时间：'+e.details+'</p>';
+							$.each(e.sub_reply, (i, e) => {
+								str += '<p>'+e.acount+':'+e.details+'</p>';
+							});
+							str += '<input type="text"/><button onclick="subReply('+e.ID+', this)">回复</button>'
+							str += '</li>';
+						});
+						$("#reply_wrapper").append(str);
+					}
+				}
+			});
+		}
+		replyList();
+
+
+		function subReply(replyID, self) {
+			const subReply = $(self).siblings('input').val();
+			const json = {
+				replyID: replyID,
+				subReply: subReply
+			}
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:6060/reply/subReply',
+				data: json,
+				success: function(returnData) {
+					console.log(returnData)
+				}
+			});
+		}
+	</script>
+</body>
+</html>
