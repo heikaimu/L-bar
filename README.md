@@ -32,6 +32,7 @@ server->server.js中修改"res.header("Access-Control-Allow-Origin", "http://192
 然后分别安装依赖npm install，安装好后，web控制台运行npm run dev,server控制台运行node server.js,即可启动
 
 ## 截图
+![](https://github.com/heikaimu/L-bar/master/1.png)
 
 * 消息页面
 
