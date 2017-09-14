@@ -11,6 +11,7 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 * **Vuex**：实现不同组件间的状态共享
 * **Vue-router**：页面路由切换,实现单页的核心
 * **vueg**：页面复杂场景切换效果
+* **vue-lazyload**：图片懒加载
 * **axios**：一个基于 `Promise` 的 HTTP 库，向后端发起请求
 * **Express**、**Koa2**：开发环境使用Express，生产环境使用Koa2
 * **ES6**、**ES7**、promise/async/await 处理异步
