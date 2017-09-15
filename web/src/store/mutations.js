@@ -17,5 +17,13 @@ export const mutations = {
     state.userIfo = {}
     localStorage.setItem('loginStatus', JSON.stringify(state.loginStatus))
     localStorage.setItem('userIfo', JSON.stringify(state.userIfo))
+  },
+  [types.SET_HEAD_THUMB](state, imgSrc) {
+    state.userIfo.head_thumb = imgSrc
+    localStorage.setItem('userIfo', JSON.stringify(state.userIfo))
+  },
+  [types.SET_NICKNAME](state, nickname) {
+    state.userIfo.nickname = nickname
+    localStorage.setItem('userIfo', JSON.stringify(state.userIfo))
   }
 }

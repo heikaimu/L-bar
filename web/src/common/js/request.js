@@ -1,5 +1,5 @@
 import axios from 'axios'
-const HOST = 'http://192.168.1.4:6060'
+const HOST = 'http://localhost:6060'
 
 /**
  * [requestGet 封装get请求]
