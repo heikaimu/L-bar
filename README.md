@@ -44,6 +44,8 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 ![](https://github.com/heikaimu/L-bar/raw/master/show/11.png)
 ![](https://github.com/heikaimu/L-bar/raw/master/show/12.png)
 ![](https://github.com/heikaimu/L-bar/raw/master/show/13.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/14.png)
+![](https://github.com/heikaimu/L-bar/raw/master/show/15.png)
 
 ## 今后发展
 
