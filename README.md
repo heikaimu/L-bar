@@ -26,7 +26,7 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 ## 使用方式
 
 下载文件，web文件夹是客户端，server是服务端，
-首先导入数据库（由于只有数据结构，所以没有任何贴吧主体，需要自己在theme表中随意添加2个主题，方便后续操作）
+首先导入数据库
 然后分别安装依赖npm install，安装好后，web控制台运行npm run dev,server控制台运行node server.js,即可启动
 项目运行在http://localhost:8080/
 
