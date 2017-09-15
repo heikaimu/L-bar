@@ -15,7 +15,7 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 * **ES6**、**ES7**、promise/async/await 处理异步
 * **localStorage**：本地保存用户信息
 * **Webpack**：模块打包，前端项目构建工具首选
-* **stylus**(**stylus**)：CSS预处理语言
+* **stylus**：CSS预处理语言
 * **Flex**：flex弹性布局，简单适配手机、PC端
 * **CSS3**：CSS3过渡动画及样式
 * **BetterScroll**：模拟原生app的列表滚动效果
