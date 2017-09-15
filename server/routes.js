@@ -43,7 +43,7 @@ exports.urls = (server) => {
   });
 
   // 上传头像
-  server.post('/user/changeHeadThumb', (req, res) => {
+  server.get('/user/changeHeadThumb', (req, res) => {
     user.changeHeadThumb(req, res);
   });
 
@@ -69,7 +69,10 @@ exports.urls = (server) => {
   server.get('/theme/collectList', (req, res) => {
     theme.collectThemeList(req, res);
   });
-
+  // 关注的所有贴吧列表
+  server.post('/theme/createNewBar', (req, res) => {
+    theme.createNewBar(req, res);
+  });
   
   // **************帖子*************
   // 推荐列表

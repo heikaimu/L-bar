@@ -1,13 +1,16 @@
 <template>
   <div class="theme">
+    <VWarn></VWarn>
     <VHeader :title="'进吧'" :backShow="false"></VHeader>
     <BScroll class="theme-container">
       <div>
         <Search @search = "search" @unSearch = "unSearch" :theme = "searchTheme"></Search>
+        <h2 class="title">我的收藏</h2>
         <ThemeList :theme = "collectThemeList"></ThemeList>
       </div>
     </BScroll>
     <Tab :currentTab = '2'></Tab>
+    <div class="create-bar" @click="createBar">建吧+</div>
   </div>
 </template>
 
@@ -17,6 +20,7 @@
   import Search from '@/base/Search/Search'
   import Tab from '@/components/Common/Tab/Tab'
   import ThemeList from '@/components/Common/ThemeList/ThemeList'
+  import VWarn from '@/base/Warn/Warn'
   import {mapGetters} from 'vuex'
   import {getThemeListByKeyword, collectTheme} from '@/api/theme'
 
@@ -30,7 +34,8 @@
     },
     computed: {
       ...mapGetters([
-        'userIfo'
+        'userIfo',
+        'isLogin'
       ])
     },
     created() {
@@ -51,9 +56,18 @@
       unSearch() {
         this.searchTheme = []
       },
+      createBar() {
+        if (this.isLogin) {
+          this.$router.push('/create_bar')
+        } else {
+          this.$store.dispatch('setShowWarn', '请登录~')
+          setTimeout(() => {
+            this.$router.push('/welcome')
+          }, 2000)
+        }
+      },
       _getCollectTheme() {
         const res = collectTheme(this.userIfo.ID)
-        console.log(res)
         res.then((result) => {
           const {data} = result
           this.collectThemeList = data.theme_list
@@ -65,7 +79,8 @@
       Tab,
       BScroll,
       Search,
-      ThemeList
+      ThemeList,
+      VWarn
     }
   }
 </script>
@@ -84,4 +99,22 @@
       position: fixed
       top: 40px
       bottom: 50px
+      .title
+        border-1px($color-border)
+        text-align: center
+        line-height: 60px
+        font-size: $size-large
+        font-weight: 900
+    .create-bar
+      width: 60px
+      height: 60px
+      border-radius: 50%
+      background: $color-blue1
+      box-shadow: 0 0 6px $color-text
+      position: fixed
+      bottom: 70px
+      right: 20px
+      text-align: center
+      line-height: 60px
+      color: $color-white
 </style>

@@ -1,4 +1,4 @@
-import {requestGet} from '@/common/js/request'
+import {requestGet, requestPost} from '@/common/js/request'
 const API_CONFIG = '/theme'
 
 /**
@@ -49,3 +49,13 @@ export const collect = (data) => {
 export const collectTheme = (userId) => {
   return requestGet(`${API_CONFIG}/collectList?user_id=${userId}`)
 }
+
+/**
+ * [创建贴吧]
+ * @param {[object]} barname, barimg [贴吧名字,贴吧头像]
+ * @return {[object]}                [promise]
+ */
+export const createNewBar = (data) => {
+  return requestPost(`${API_CONFIG}/createNewBar`, data)
+}
+

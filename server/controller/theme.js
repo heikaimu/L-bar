@@ -2,19 +2,32 @@
 const database = require('./DB/database.js');
 // user.js
 
+// 创建贴吧
+exports.createNewBar = (req, res) => {
+    if (req.session.user) {
+        const barName = req.body.barName;
+        const barImg = req.body.barImg;
+        const sql = `INSERT INTO theme (theme, head_thumb) VALUES (?, ?)`;
+        database.query(sql, [barName, barImg], () => {
+            res.send({code: 1, msg: "创建成功"});
+        });
+    } else {
+        res.send({code: 0, msg: "请登录"});
+    }
+}
 
 // 吧列表
 exports.themeList = (req, res) => {
-	const keyword = typeof(req.query.keyword) === 'undefined' ? '' : req.query.keyword;
-	const sql = `SELECT * FROM theme WHERE theme LIKE '%${keyword}%'`;
-	database.query(sql, [], (data) => {
-		res.send({
+  const keyword = typeof(req.query.keyword) === 'undefined' ? '' : req.query.keyword;
+  const sql = `SELECT * FROM theme WHERE theme LIKE '%${keyword}%'`;
+  database.query(sql, [], (data) => {
+	res.send({
       code: 1,
       data: {
         theme_list: data
       }
     });
-	});
+  });
 }
 
 // 吧详情

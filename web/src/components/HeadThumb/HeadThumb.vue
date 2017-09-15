@@ -1,12 +1,16 @@
 <template>
   <div class="head-thumb-wrapper">
-    <Warn></Warn>
+    <VWarn></VWarn>
     <div class="back-btn icon-angle-left" @click="$router.push('/user')"></div>
     <div class="avatar-wrapper">
-      <div class="avatar"><img :src="userIfo.head_thumb" alt=""></div>
+      <div class="avatar">
+        <img :src="userIfo.head_thumb" alt="">
+        <span class="loading" v-show="isShowLoading"></span>
+      </div>
     </div>
     <div class="avatar-btn">
-      <input type="file" @change="upload">
+      <label for="file" class="btn">选择上传图片</label>
+      <input type="file" @change="upload" id="file" v-show="false">
     </div>
   </div>
 </template>
@@ -18,10 +22,11 @@
   import $ from 'jquery'
   const DOMAIN = 'http://ow97kusp4.bkt.clouddn.com/'
   const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
+  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:akMwIN3_Y73_lrgqk5NXpTGO7u4=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU0OTM0OTJ9'
   export default {
     data() {
       return {
-        token: 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:akMwIN3_Y73_lrgqk5NXpTGO7u4=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU0OTM0OTJ9'
+        isShowLoading: false
       }
     },
     computed: {
@@ -31,10 +36,11 @@
     },
     methods: {
       upload(e) {
+        this.isShowLoading = true
         let file = e.target.files[0]
         let param = new FormData()
         param.append('file', file)
-        param.append('token', this.token)
+        param.append('token', TOKEN)
         $.ajax({
           type: 'post',
           url: 'http://upload.qiniu.com/',
@@ -48,8 +54,9 @@
             result.then((data) => {
               const {code, msg} = data
               if (code === 1) {
-                this.$store.dispatch('setShowWarn', '头像修改成功~')
+                this.isShowLoading = false
                 this.$store.commit('SET_HEAD_THUMB', newHeadThumb)
+                this.$store.dispatch('setShowWarn', '头像修改成功~')
               } else {
                 this.$store.dispatch('setShowWarn', msg)
               }
@@ -97,21 +104,32 @@
         background: $color-border
         border-radius: 50%
         overflow: hidden
+        position: relative
         &>img
           width: 100%
           height: 100%
+        .loading
+          width: 100%
+          height: 100%
+          border-radius: 50%
+          position: absolute
+          top: 0
+          left: 0
+          background: url("./loading.gif") no-repeat center center $color-white
     .avatar-btn
       display: flex
       position: absolute
       bottom: 0
       width: 100%
       background: $color-white
-      &>button
+      .btn
         flex: 1
         height: 50px
         margin: 5px
         border: none
         background: $color-orange
+        text-align: center
+        line-height: 50px
         font-size: $size-large-x
         letter-spacing: 2px
         color: $color-white

@@ -101,9 +101,9 @@ exports.changeHeadThumb = (req, res) => {
 		const imgSrc = req.query.imgSrc;
 		const userId = req.session.user.ID;
 		const sql = `UPDATE user SET head_thumb = ? WHERE ID = ?`;
-    database.query(sql, [imgSrc, userId], () => {
-      res.send({code: 1, msg: "修改成功"});
-    });
+		database.query(sql, [imgSrc, userId], () => {
+		  res.send({code: 1, msg: "修改成功"});
+		});
 	} else {
     res.send({code: 0, msg: "请登录"});
 	}

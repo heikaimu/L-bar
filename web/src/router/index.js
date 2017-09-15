@@ -13,6 +13,7 @@ import CollectTheme from '@/components/CollectTheme/CollectTheme'
 import HeadThumb from '@/components/HeadThumb/HeadThumb'
 import ChangePwd from '@/components/ChangePwd/ChangePwd'
 import ChangeNickname from '@/components/ChangeNickname/ChangeNickname'
+import CreateBar from '@/components/CreateBar/CreateBar'
 
 Vue.use(Router)
 
@@ -69,6 +70,10 @@ export default new Router({
     {
       path: '/change_nickname',
       component: ChangeNickname
+    },
+    {
+      path: '/create_bar',
+      component: CreateBar
     }
   ]
 })

@@ -3,11 +3,11 @@
     <ul class="tab-wrapper">
       <li class="tab-item" :class="{active: currentTab == 1}" @click="$router.push('/publish')">
         <span class="icon icon-home"></span>
-        <p class="txt">首页</p>
+        <p class="txt">推荐</p>
       </li>
       <li class="tab-item" :class="{active: currentTab == 2}" @click="$router.push('/theme')">
         <span class="icon icon-comments"></span>
-        <p class="txt">看帖</p>
+        <p class="txt">进吧</p>
       </li>
       <li class="tab-item" :class="{active: currentTab == 3}" @click="$router.push('/user')">
         <span class="icon icon-user"></span>

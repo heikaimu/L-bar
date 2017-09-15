@@ -1,7 +1,7 @@
 <template>
   <div class="theme-desc">
     <div class="theme-ifo">
-      <div class="avatar" :style="avatar"></div>
+      <div class="avatar"><img :src="details.head_thumb" alt=""></div>
       <h2 class="name">{{details.theme}}</h2>
     </div>
     <div class="sign-collect">
@@ -24,14 +24,6 @@
         type: Number,
         default() {
           return 0
-        }
-      }
-    },
-    computed: {
-      avatar() {
-        return {
-          background: `url(${this.details.head_thumb}) no-repeat`,
-          backgroundSize: 'cover'
         }
       }
     },
@@ -60,6 +52,9 @@
         width: 60px
         height: 60px
         background: $color-text
+        &>img
+          width: 100%
+          height: 100%
       .name
         padding-left: 10px
         color: $color-title
