@@ -1,16 +1,67 @@
 <template>
   <div class="head-thumb-wrapper">
+    <Warn></Warn>
     <div class="back-btn icon-angle-left" @click="$router.push('/user')"></div>
     <div class="avatar-wrapper">
       <div class="avatar"><img :src="userIfo.head_thumb" alt=""></div>
     </div>
     <div class="avatar-btn">
-      <button>选择图片</button>
+      <input type="file" @change="upload">
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+  import VWarn from '@/base/Warn/Warn'
+  import {mapGetters} from 'vuex'
+  import {changeHeadThumb} from '@/api/user'
+  import $ from 'jquery'
+  const DOMAIN = 'http://ow97kusp4.bkt.clouddn.com/'
+  const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
+  export default {
+    data() {
+      return {
+        token: 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:akMwIN3_Y73_lrgqk5NXpTGO7u4=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU0OTM0OTJ9'
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'userIfo'
+      ])
+    },
+    methods: {
+      upload(e) {
+        let file = e.target.files[0]
+        let param = new FormData()
+        param.append('file', file)
+        param.append('token', this.token)
+        $.ajax({
+          type: 'post',
+          url: 'http://upload.qiniu.com/',
+          data: param,
+          contentType: false,
+          processData: false,
+          async: true,
+          success: (res) => {
+            const newHeadThumb = `${DOMAIN}${res.key}${IMGSTYLE}`
+            const result = changeHeadThumb(newHeadThumb)
+            result.then((data) => {
+              const {code, msg} = data
+              if (code === 1) {
+                this.$store.dispatch('setShowWarn', '头像修改成功~')
+                this.$store.commit('SET_HEAD_THUMB', newHeadThumb)
+              } else {
+                this.$store.dispatch('setShowWarn', msg)
+              }
+            })
+          }
+        })
+      }
+    },
+    components: {
+      VWarn
+    }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

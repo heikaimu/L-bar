@@ -81,9 +81,10 @@ exports.changePwd = (req, res) => {
 	if (req.session.user) {
 		const oldPwd = secret.md5(req.body.oldPwd);
 		const newPwd = secret.md5(req.body.newPwd);
+    const userId = req.session.user.ID;
 		if (req.session.user.password === oldPwd) {
-			const queryStr = "UPDATE user SET password = '" + newPwd + "' WHERE ID = " + req.session.user.ID;
-			database.query(queryStr, [], (data) => {
+			const queryStr = "UPDATE user SET password = ? WHERE ID = ?";
+			database.query(queryStr, [newPwd, userId], (data) => {
 				res.send({code: 1, msg: "密码修改成功"});
 			});
 		} else {
@@ -95,10 +96,16 @@ exports.changePwd = (req, res) => {
 }
 
 // 修改头像
-exports.uploadHeadThumb = (req, res) => {
+exports.changeHeadThumb = (req, res) => {
 	if (req.session.user) {
-		
-		res.send({OK: true, msg: ""});
+		const imgSrc = req.query.imgSrc;
+		const userId = req.session.user.ID;
+		const sql = `UPDATE user SET head_thumb = ? WHERE ID = ?`;
+    database.query(sql, [imgSrc, userId], () => {
+      res.send({code: 1, msg: "修改成功"});
+    });
+	} else {
+    res.send({code: 0, msg: "请登录"});
 	}
 }
 
@@ -106,8 +113,9 @@ exports.uploadHeadThumb = (req, res) => {
 exports.changeNickname = (req, res) => {
 	if (req.session.user) {
 		const nickname = req.body.nickname;
-		const queryStr = "UPDATE user SET nickname = '" + nickname + "' WHERE ID = " + req.session.user.ID;
-		database.query(queryStr, [], (data) => {
+    const userId = req.session.user.ID;
+		const queryStr = `UPDATE user SET nickname = ? WHERE ID = ?`;
+		database.query(queryStr, [nickname, userId], (data) => {
 			req.session.user.nickname = nickname;
 			res.send({code: 1, msg: "修改成功"});
 		});

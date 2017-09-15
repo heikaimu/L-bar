@@ -60,18 +60,8 @@
           nickname: this.nickname
         })
         if (code === 1) {
-          this.$store.commit('LOGOUT')
-          this.$store.dispatch('openShowWarn', '昵称修改成功，3s后回到首页')
-          setTimeout(() => {
-            this.$store.dispatch('openShowWarn', '昵称修改成功，2s后回到首页')
-          }, 1000)
-          setTimeout(() => {
-            this.$store.dispatch('openShowWarn', '昵称修改成功，1s后回到首页')
-          }, 2000)
-          setTimeout(() => {
-            this.$store.dispatch('closeShowWarn')
-            this.$router.push('/Welcome')
-          }, 2500)
+          this.$store.commit('SET_NICKNAME', this.nickname)
+          this.$store.dispatch('setShowWarn', '修改成功~')
         } else {
           this.$store.dispatch('setShowWarn', msg)
         }

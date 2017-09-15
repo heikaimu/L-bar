@@ -1,4 +1,4 @@
-import {requestPost} from '@/common/js/request'
+import {requestPost, requestGet} from '@/common/js/request'
 const API_CONFIG = '/user'
 
 /**
@@ -44,4 +44,13 @@ export const changePwd = (data) => {
  */
 export const changeNickname = (data) => {
   return requestPost(`${API_CONFIG}/changeNickname`, data)
+}
+
+/**
+ * [上传头像]
+ * @param {[string]} imgSrc [新头像链接]
+ * @return {[string]}    [上传后的外链]
+ */
+export const changeHeadThumb = (str) => {
+  return requestGet(`${API_CONFIG}/changeHeadThumb?imgSrc=${str}`)
 }

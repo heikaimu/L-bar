@@ -1,3 +1,5 @@
 export const SET_LOGIN = 'SET_LOGIN'
+export const SET_HEAD_THUMB = 'SET_HEAD_THUMB'
+export const SET_NICKNAME = 'SET_NICKNAME'
 export const LOGOUT = 'LOGOUT'
 export const SHOW_WARN = 'SHOW_WARN'

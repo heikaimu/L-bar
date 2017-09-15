@@ -43,8 +43,8 @@ exports.urls = (server) => {
   });
 
   // 上传头像
-  server.post('/user/uploadHeadThumb', (req, res) => {
-    user.uploadHeadThumb(req, res);
+  server.post('/user/changeHeadThumb', (req, res) => {
+    user.changeHeadThumb(req, res);
   });
 
   // **************吧*************

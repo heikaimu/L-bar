@@ -5,7 +5,7 @@
     <div class="black-board" v-show="isSliderBarShow" @click="isSliderBarShow=false"></div>
     <transition name="fade">
       <div class="slider-nav" v-show="isSliderBarShow">
-        <!--<p @click="$router.push('/head_thumb')">修改头像</p>-->
+        <p @click="$router.push('/head_thumb')">修改头像</p>
         <p @click="$router.push('/change_nickname')">修改昵称</p>
         <p @click="$router.push('/change_pwd')">修改密码</p>
         <p @click="logout">退出登录</p>
