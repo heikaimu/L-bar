@@ -12,7 +12,6 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 * **Vue-router**：页面路由切换,实现单页的核心
 * **vueg**：页面复杂场景切换效果
 * **axios**：一个基于 `Promise` 的 HTTP 库，向后端发起请求
-* **Express**、**Koa2**：开发环境使用Express，生产环境使用Koa2
 * **ES6**、**ES7**、promise/async/await 处理异步
 * **localStorage**：本地保存用户信息
 * **Webpack**：模块打包，前端项目构建工具首选
@@ -20,6 +19,7 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 * **Flex**：flex弹性布局，简单适配手机、PC端
 * **CSS3**：CSS3过渡动画及样式
 * **BetterScroll**：模拟原生app的列表滚动效果
+* **nodejs**：服务器搭建
 * **MySQL**：MySQL关系型数据库持久化数据（考虑到表与表之间关系复杂，需要多表查询，最复杂的时候是四表查询）
 
 ## 使用方式
