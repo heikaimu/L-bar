@@ -25,11 +25,9 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 ## 使用方式
 
 下载文件，web文件夹是客户端，server是服务端，
-首先修改主机ip为自己本机的ip，也可以用localhost（但是就不能手机连接wifi使用了）
-web->src->common->js>request.js中修改成自己的本机ip
-server->server.js中修改"res.header("Access-Control-Allow-Origin", "http://192.168.1.4:8080");"ip为自己的本机ip
-然后倒入数据库（由于只有数据结构，所以没有任何贴吧主体，需要自己在theme表中随意添加2个主题，方便后续操作）
+首先导入数据库（由于只有数据结构，所以没有任何贴吧主体，需要自己在theme表中随意添加2个主题，方便后续操作）
 然后分别安装依赖npm install，安装好后，web控制台运行npm run dev,server控制台运行node server.js,即可启动
+项目运行在http://localhost:8080/
 
 ## 截图
 ![](https://github.com/heikaimu/L-bar/raw/master/show/1.png)
