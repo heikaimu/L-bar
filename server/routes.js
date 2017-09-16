@@ -85,6 +85,11 @@ exports.urls = (server) => {
     postBar.typeList(req, res);
   });
 
+  // 我的帖子
+  server.get('/postBar/myBarList', (req, res) => {
+    postBar.myBarList(req, res);
+  });
+
   // 帖子详情
   server.get('/postBar/details', (req, res) => {
     postBar.details(req, res);

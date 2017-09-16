@@ -49,7 +49,7 @@
   import {mapGetters} from 'vuex'
   const DOMAIN = 'http://ow97kusp4.bkt.clouddn.com/'
   const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:akMwIN3_Y73_lrgqk5NXpTGO7u4=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU0OTM0OTJ9'
+  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:PIrIu4rbdrHZ8MYOn3nDa3tMjnY=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU1NzE0MTV9'
   export default {
     data() {
       return {
@@ -91,12 +91,12 @@
             barImg: this.barImg
           })
           if (code === 1) {
-            this.$store.dispatch('openShowWarn', '3秒后返回')
+            this.$store.dispatch('openShowWarn', '创建成功,3秒后返回')
             setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '2秒后返回')
+              this.$store.dispatch('openShowWarn', '创建成功,2秒后返回')
             }, 1000)
             setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '1秒后返回')
+              this.$store.dispatch('openShowWarn', '创建成功,1秒后返回')
             }, 2000)
             setTimeout(() => {
               this.$store.dispatch('closeShowWarn')

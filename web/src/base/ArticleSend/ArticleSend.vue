@@ -7,7 +7,7 @@
     <div class="action-wrapper">
       <div class="left-wrapper">
         <span class="icon icon-smile" @click="faceShow = true"></span>
-        <span class="icon icon-plus"></span>
+        <span class="icon icon-picture" @click="imgShow = true; faceShow = false"></span>
       </div>
       <label class="input-wrapper" @click="inputBlur">
         <textarea name="" v-model="message" id="" cols="30" rows="10" ref="inputForm" placeholder="我想说点什么..."></textarea>
@@ -21,10 +21,12 @@
         <li class="face-item" v-for = "(item, index) in faces"><img :src="'../../static/images/face/fFace_'+item.id+'.png'" @click="appendThisFace(item)"></li>
       </ul>
     </div>
+    <ImgUpload v-show="imgShow" :imgList="imgList" @imgUpload="imgUpload" @imgRemove="imgRemove"></ImgUpload>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import ImgUpload from '@/base/ImgUpload/ImgUpload'
   export default {
     props: {
       replyScroll: {
@@ -36,13 +38,20 @@
         title: '',
         message: '',
         faces: [{id: '01', name: '#(呵呵)'}, {id: '02', name: '#(哈哈)'}, {id: '03', name: '#(吐舌)'}, {id: '04', name: '#(啊)'}, {id: '05', name: '#(酷)'}, {id: '06', name: '#(怒)'}, {id: '07', name: '#(开心)'}, {id: '08', name: '#(汗)'}, {id: '09', name: '#(泪)'}, {id: '10', name: '#(黑线)'}, {id: '11', name: '#(鄙视)'}, {id: '12', name: '#(不高兴)'}, {id: '13', name: '#(真棒)'}, {id: '14', name: '#(钱)'}, {id: '15', name: '#(疑问)'}, {id: '16', name: '#(阴险)'}, {id: '17', name: '#(吐)'}, {id: '18', name: '#(咦)'}, {id: '19', name: '#(委屈)'}, {id: '20', name: '#(开心)'}, {id: '21', name: '#(呼)'}, {id: '22', name: '#(笑眼)'}, {id: '23', name: '#(冷)'}, {id: '24', name: '#(太开心)'}, {id: '25', name: '#(斜眼)'}, {id: '26', name: '#(勉强)'}, {id: '27', name: '#(狂汗)'}, {id: '28', name: '#(乖)'}, {id: '29', name: '#(睡觉)'}, {id: '30', name: '#(惊吓)'}, {id: '31', name: '#(生气)'}, {id: '32', name: '#(惊讶)'}, {id: '33', name: '#(喷)'}],
-        faceShow: false
+        faceShow: false,
+        imgList: [],
+        imgShow: false
       }
     },
     methods: {
       appendThisFace(item) {
         this.message += item.name
-//          this.$refs.inputForm.focus()
+      },
+      imgUpload(img) {
+        this.imgList.push(img)
+      },
+      imgRemove(index) {
+        this.imgList.splice(index, 1)
       },
       inputBlur() {
         this.faceShow = false
@@ -53,23 +62,32 @@
       submit() {
         this.$emit('sub-article', {
           title: this.title,
-          details: this.message
+          details: this.message,
+          img: JSON.stringify(this.imgList)
         })
+        this._reset()
+      },
+      _reset() {
+        this.title = ''
         this.msg = ''
         this.message = ''
+        this.imgList = []
         this.faceShow = false
+        this.imgShow = false
       }
     },
     watch: {
       replyScroll() {
         if (this.active) {
-          this.faceShow = false
-          this.message = ''
+          this._reset()
           setTimeout(() => {
             document.body.scrollTop = document.body.scrollHeight
           }, 100)
         }
       }
+    },
+    components: {
+      ImgUpload
     }
   }
 </script>

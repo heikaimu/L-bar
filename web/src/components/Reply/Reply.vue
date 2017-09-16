@@ -34,10 +34,8 @@
     },
     methods: {
       async submit(data) {
-        const {code, msg} = await submitReply({
-          postBarId: this.$route.params.id,
-          msg: data
-        })
+        data.postBarId = this.$route.params.id
+        const {code, msg} = await submitReply(data)
         if (code === 1) {
           this._getReplyList()
           this.$store.dispatch('setShowWarn', '回复成功~')
@@ -47,12 +45,16 @@
       },
       async _getReplyList() {
         const {data} = await getReplyList(this.$route.params.id)
+        for (let i = 0; i < data.list.length; i++) {
+          const imgStr = data.list[i].img
+          data.list[i].img = JSON.parse(imgStr)
+        }
         this.replyList = data.list
       },
       async _getDetails() {
         const {data} = await getPostBarDetails(this.$route.params.id)
+        data.details.img = JSON.parse(data.details.img)
         this.details = data.details
-        console.log(this.details)
       }
     },
     components: {

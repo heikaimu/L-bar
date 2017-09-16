@@ -10,12 +10,14 @@
     </div>
     <div class="content">
       <TextContent :text="details.details"></TextContent>
+      <ImgContent :imgList="details.img"></ImgContent>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import TextContent from '@/base/TextContent/TextContent'
+  import ImgContent from '@/base/ImgContent/ImgContent'
   import {getPostTime} from '@/common/js/time'
   export default {
     props: {
@@ -39,7 +41,8 @@
       }
     },
     components: {
-      TextContent
+      TextContent,
+      ImgContent
     }
   }
 </script>

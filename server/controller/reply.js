@@ -37,13 +37,14 @@ exports.postReply = (req, res) => {
 	// 判断当前是否登录
 	if (req.session.user) {
 		const details = req.body.msg;
+        const img = req.body.img;
 		const addTime = publicJs.getNowDate();
 		const postBarID = req.body.postBarId;
 		const userID = req.session.user.ID;
 		const sql = `INSERT INTO reply
-		(details, add_time, post_bar_id, user_id)
-		VALUES (?, ?, ?, ?)`;
-		database.query(sql, [details, addTime, postBarID, userID], (data) => {
+		(details, img, add_time, post_bar_id, user_id)
+		VALUES (?, ?, ?, ?, ?)`;
+		database.query(sql, [details, img, addTime, postBarID, userID], (data) => {
 			res.send({code: 1, msg: "回复成功"});
 		});
 	} else {

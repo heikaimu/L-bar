@@ -26,8 +26,12 @@
     },
     methods: {
       async _getPublishList() {
-        var res = await getPostBarPublishList()
-        this.postBarList = res.data.post_bar
+        var {data} = await getPostBarPublishList()
+        for (let i = 0; i < data.post_bar.length; i++) {
+          const imgStr = data.post_bar[i].img
+          data.post_bar[i].img = JSON.parse(imgStr)
+        }
+        this.postBarList = data.post_bar
       }
     },
     components: {

@@ -39,10 +39,22 @@
     },
     created() {
       this._getDetail()
-      this._getCollectThemeList()
+      this._getThemeList()
       this._checkIsCollect()
     },
     methods: {
+      async submit(data) {
+        data.themeId = this.$route.params.id
+        console.log(data)
+        const {code, msg} = await submitPostBar(data)
+        if (code === 1) {
+          this.$store.dispatch('setShowWarn', '发帖成功~O(∩_∩)O')
+          this._getThemeList()
+        } else {
+          this.$store.dispatch('setShowWarn', msg)
+        }
+        this.isShowPostArticle = false
+      },
       async collect() {
         const {code} = await collect({
           themeId: this.$route.params.id,
@@ -58,27 +70,18 @@
           themeId: this.$route.params.id,
           userId: this.userIfo.ID
         })
-        console.log(code)
         this.isCollect = code
       },
       async _getDetail() {
         const {data} = await getThemeDetails(this.$route.params.id)
         this.details = data.theme_details
       },
-      async submit(data) {
-        data.themeId = this.$route.params.id
-        console.log(data)
-        const {code, msg} = await submitPostBar(data)
-        if (code === 1) {
-          this.$store.dispatch('setShowWarn', '发帖成功~O(∩_∩)O')
-          this._getCollectThemeList()
-        } else {
-          this.$store.dispatch('setShowWarn', msg)
-        }
-        this.isShowPostArticle = false
-      },
-      async _getCollectThemeList() {
+      async _getThemeList() {
         const {data} = await getPostBarList(this.$route.params.id)
+        for (let i = 0; i < data.post_bar.length; i++) {
+          const imgStr = data.post_bar[i].img
+          data.post_bar[i].img = JSON.parse(imgStr)
+        }
         this.postBar = data.post_bar
       }
     },

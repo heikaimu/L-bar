@@ -22,7 +22,7 @@
   import $ from 'jquery'
   const DOMAIN = 'http://ow97kusp4.bkt.clouddn.com/'
   const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:akMwIN3_Y73_lrgqk5NXpTGO7u4=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU0OTM0OTJ9'
+  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:PIrIu4rbdrHZ8MYOn3nDa3tMjnY=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU1NzE0MTV9'
   export default {
     data() {
       return {
@@ -52,9 +52,9 @@
             const newHeadThumb = `${DOMAIN}${res.key}${IMGSTYLE}`
             const result = changeHeadThumb(newHeadThumb)
             result.then((data) => {
+              this.isShowLoading = false
               const {code, msg} = data
               if (code === 1) {
-                this.isShowLoading = false
                 this.$store.commit('SET_HEAD_THUMB', newHeadThumb)
                 this.$store.dispatch('setShowWarn', '头像修改成功~')
               } else {

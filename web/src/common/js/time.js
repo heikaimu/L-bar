@@ -32,7 +32,7 @@ export function getPostTime(time) {
   var min = 1000 * 60
   var now = new Date()
   var birthday = new Date(birth)
-  if (now - birthday < 0) return ''
+  if (now - birthday <= 0) return '刚才'
   var age = parseInt((now - birthday) / year)
   if (age !== 0) {
     return age + '年'

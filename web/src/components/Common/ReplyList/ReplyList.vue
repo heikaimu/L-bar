@@ -10,6 +10,7 @@
       </div>
       <div class="reply-content">
         <TextContent :text="item.details"></TextContent>
+        <ImgContent :imgList="item.img"></ImgContent>
         <!--<div class="sub-reply-wrapper" v-if = "item.sub_reply.length !== 0">-->
           <!--<p class="sub-reply-text" v-for="item in item.sub_reply">-->
             <!--<i>{{item.acount, item.nickname | nameJudge}}</i>-->
@@ -24,6 +25,7 @@
 
 <script type="text/ecmascript-6">
     import TextContent from '@/base/TextContent/TextContent'
+    import ImgContent from '@/base/ImgContent/ImgContent'
     import {getPostTime} from '@/common/js/time'
     export default {
       props: {
@@ -49,7 +51,8 @@
         }
       },
       components: {
-        TextContent
+        TextContent,
+        ImgContent
       }
     }
 </script>

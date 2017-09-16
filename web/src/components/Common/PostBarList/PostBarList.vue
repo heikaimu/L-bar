@@ -8,10 +8,13 @@
         <p class="add-time">{{item.add_time | timeCut}}</p>
       </div>
     </div>
-    <div class="content-wrapper" @click="$router.push(`/reply/${item.ID}`)">
-      <h2 class="desc">{{item.title}}</h2>
-      <div class="content">
+    <div class="content-wrapper">
+      <h2 class="desc" @click="$router.push(`/reply/${item.ID}`)">{{item.title}}</h2>
+      <div class="content" @click="$router.push(`/reply/${item.ID}`)">
         <TextContent :text="item.details"></TextContent>
+      </div>
+      <div class="img-box" v-if="item.img">
+        <div class="img-item" v-for="(imgSrc, index) in item.img" v-if="index < 2"><img :src="imgSrc" alt=""></div>
       </div>
       <div class="other-icon">
         <p class="bar-name">{{item.theme || ''}}</p>
@@ -93,6 +96,21 @@
             font-size: $size-small-x
             color: $color-text
             line-height: 1.5
+        .img-box
+          display: flex
+          width: 100%
+          margin-top: 15px
+          .img-item
+            display: flex
+            align-items: center
+            justify-content: center
+            flex: 1
+            height: 150px
+            margin: 0 2px
+            background: $color-title
+            overflow: hidden
+            &>img
+              max-height: 100%
         .other-icon
           height: 30px
           display: flex

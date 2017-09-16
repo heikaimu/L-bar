@@ -50,7 +50,7 @@
   import BScroll from '@/base/BScroll/BScroll'
   import Warn from '@/base/Warn/Warn'
   import PostBarList from '@/components/Common/PostBarList/PostBarList'
-  import {getPostBarList} from '@/api/postBar'
+  import {getMyPostBarList} from '@/api/postBar'
   import {collectTheme} from '@/api/theme'
   import {getAge} from '@/common/js/time'
   export default {
@@ -107,7 +107,11 @@
         }, 2500)
       },
       async _getBarList() {
-        const {data} = await getPostBarList(1)
+        const {data} = await getMyPostBarList(this.userIfo.ID)
+        for (let i = 0; i < data.post_bar.length; i++) {
+          const imgStr = data.post_bar[i].img
+          data.post_bar[i].img = JSON.parse(imgStr)
+        }
         this.postBarList = data.post_bar
       },
       async _getCollectBarNum() {

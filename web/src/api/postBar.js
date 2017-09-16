@@ -19,6 +19,15 @@ export const getPostBarList = (themeId) => {
 }
 
 /**
+ * [我的帖子]
+ * @param {[number]} themeId [主题id]
+ * @return {[array]}        [帖子数组]
+ */
+export const getMyPostBarList = (userId) => {
+  return requestGet(`${API_CONFIG}/myBarList?user_id=${userId}`)
+}
+
+/**
  * [帖子详情]
  * @param {[number]} postBarId [帖子id]
  * @return {[object]}          [帖子详情]
