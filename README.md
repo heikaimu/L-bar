@@ -2,10 +2,6 @@
 
 Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部分功能还在完善中）
 
-## 预览
-
-由于在开发期间没有部署在服务器上。可以查看视频演示地址：http://ow99hkq6k.bkt.clouddn.com/%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.gif
-
 ## 技术栈
 * **Vue2.0**：实现前端页面构建
 * **Vuex**：实现不同组件间的状态共享
@@ -31,25 +27,34 @@ Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部�
 项目运行在http://localhost:8080/
 
 ## 截图
-![](https://github.com/heikaimu/L-bar/raw/master/show/1.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/2.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/3.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/4.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/5.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/6.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/7.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/8.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/9.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/10.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/11.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/12.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/13.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/14.png)
-![](https://github.com/heikaimu/L-bar/raw/master/show/15.png)
+
+* 登录注册
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/a.gif)
+
+* 创建贴吧
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/b.gif)
+
+* 发帖
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/c.gif)
+
+* 回复
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/d.gif)
+
+* 关注贴吧
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/e.gif)
+
+* 修改头像
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/f.gif)
 
 ## 今后发展
 
-* 完善图片发送（之前本来已经做了但是发现存放在自己服务器不太好，当图片太多的时候，服务器压力太大，于是想象到了上传图片到七牛服务器，保存返回的链接到* 对应数据库里就可以了，该功能正在实施中）
+* 图片点击放大查看
 * 新消息提醒
 * 签到，签到等级
 * 关注吧友
