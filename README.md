@@ -2,8 +2,13 @@
 
 Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部分功能还在完善中）
 
-## 在线演示地址
+## 在线测试地址
+
 http://39.108.140.212:3389
+
+* 扫描二维码可以进入测试地址
+
+![](https://github.com/heikaimu/L-bar/raw/master/show/qr.png)
 
 ## 技术栈
 * **Vue2.0**：实现前端页面构建
