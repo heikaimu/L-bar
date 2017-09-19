@@ -21,13 +21,12 @@ http://39.108.140.212:3389
 * **BetterScroll**：模拟原生app的列表滚动效果
 * **nodejs**：服务器搭建
 * **MySQL**：MySQL关系型数据库持久化数据（考虑到表与表之间关系复杂，需要多表查询，最复杂的时候是四表查询）
+* **七牛**：图片上传地方三，能方便图片瘦身裁剪等各种功能
 
 ## 使用方式
 
-下载文件，web文件夹是客户端，server是服务端，
-首先导入数据库，然后在server->controller->DB->database.js里面修改mysql的密码为你本机的mysql密码
-然后分别安装依赖npm install，安装好后，web控制台运行npm run dev,server控制台运行node server.js,即可启动
-项目运行在http://localhost:8080/
+下载文件，web文件夹，首先导入数据库，然后在web->server->controller->DB->database.js里面修改mysql的密码为你本机的mysql密码
+安装依赖npm install，控制台运行npm run dev,即可启动
 
 ## 截图
 

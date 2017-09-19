@@ -20,9 +20,9 @@
   import {mapGetters} from 'vuex'
   import {changeHeadThumb} from '@/api/user'
   import $ from 'jquery'
-  const DOMAIN = 'http://ow97kusp4.bkt.clouddn.com/'
+  const DOMAIN = 'http://ow99hkq6k.bkt.clouddn.com/'
   const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:PIrIu4rbdrHZ8MYOn3nDa3tMjnY=:eyJzY29wZSI6ImltZy11cGxvYWQyIiwiZGVhZGxpbmUiOjE1MDU1NzE0MTV9'
+  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:BhUc4-caxAPcrc-qzC2hPiIIJgk=:eyJzY29wZSI6InBvc3QtYmFyIiwiZGVhZGxpbmUiOjE1MDU4Mjc4Mzh9'
   export default {
     data() {
       return {

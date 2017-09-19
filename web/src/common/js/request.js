@@ -1,5 +1,4 @@
 import axios from 'axios'
-const HOST = 'http://localhost:6060'
 
 /**
  * [requestGet 封装get请求]
@@ -7,7 +6,7 @@ const HOST = 'http://localhost:6060'
  * @return {[object]}    [promise]
  */
 export function requestGet(url) {
-  return axios.get(`${HOST}${url}`)
+  return axios.get(url)
     .then((res) => {
       return Promise.resolve(res.data)
     })
@@ -20,7 +19,7 @@ export function requestGet(url) {
  * @return {[object]}    [promise]
  */
 export function requestPost(url, data) {
-  return axios.post(`${HOST}${url}`, data)
+  return axios.post(url, data)
     .then((res) => {
       return Promise.resolve(res.data)
     })
