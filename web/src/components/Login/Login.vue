@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import VWarn from '@/base/Warn/Warn'
   import {login} from '@/api/user'
 
@@ -57,26 +57,24 @@
       }
     },
     methods: {
-      login() {
-        const res = login({
+      async login() {
+        const {code, is_login, user_id, user_ifo} = await login({
           user: this.user,
           pwd: this.pwd
         })
-        res.then((data) => {
-          if (data.code === 0) {
-            this.$store.dispatch('setShowWarn', '账户或密码错误')
-          } else {
-            const loginData = {
-              loginStatus: {
-                isLogin: data.is_login,
-                userId: data.user_id
-              },
-              userIfo: data.user_ifo
-            }
-            this.$store.commit('SET_LOGIN', loginData)
-            this.$router.push('/publish')
+        if (code === 0) {
+          this.$store.dispatch('setShowWarn', '账户或密码错误')
+        } else {
+          const loginData = {
+            loginStatus: {
+              isLogin: is_login,
+              userId: user_id
+            },
+            userIfo: user_ifo
           }
-        })
+          this.$store.commit('SET_LOGIN', loginData)
+          this.$router.push('/publish')
+        }
       }
     },
     components: {

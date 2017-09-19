@@ -38,7 +38,7 @@
       position: absolute
       top: 0
       bottom: 60px
-      background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504582944339&di=524a7e10a0ce0c648e222a60d8dd010b&imgtype=0&src=http%3A%2F%2Fpic3.duowan.com%2Fmh%2F1104%2F166024836174%2F166024877138.jpg') no-repeat center center
+      background: url('http://img3.duitang.com/uploads/item/201512/09/20151209023128_24daQ.jpeg') no-repeat center center
       background-size: cover
     .title-wrapper
       display: flex

@@ -3,6 +3,7 @@ const theme = require('./controller/theme');
 const postBar = require('./controller/post_bar');
 const reply = require('./controller/reply');
 const imgLibs = require('./controller/img_upload.js');
+const qn = require('./controller/qn.js');
 
 exports.urls = (server) => {
 
@@ -73,7 +74,7 @@ exports.urls = (server) => {
   server.post('/theme/createNewBar', (req, res) => {
     theme.createNewBar(req, res);
   });
-  
+
   // **************帖子*************
   // 推荐列表
   server.get('/postBar/publishList', (req, res) => {
@@ -94,7 +95,7 @@ exports.urls = (server) => {
   server.get('/postBar/details', (req, res) => {
     postBar.details(req, res);
   });
-  
+
   // 发帖
   server.post('/postBar/publish', (req, res) => {
     postBar.publish(req, res);
@@ -123,4 +124,8 @@ exports.urls = (server) => {
     imgLibs.imgUpload(req, res);
   });
 
+  // 七牛token
+  server.get('/qiniu', (req, res) => {
+    qn.qiniuToken(req, res);
+  });
 }

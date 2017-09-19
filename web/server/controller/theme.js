@@ -8,8 +8,12 @@ exports.createNewBar = (req, res) => {
         const barName = req.body.barName;
         const barImg = req.body.barImg;
         const sql = `INSERT INTO theme (theme, head_thumb) VALUES (?, ?)`;
-        database.query(sql, [barName, barImg], () => {
-            res.send({code: 1, msg: "创建成功"});
+        database.query(sql, [barName, barImg], (data) => {
+          res.send({
+            code: 1,
+            msg: "创建成功",
+            id: data.insertId
+          });
         });
     } else {
         res.send({code: 0, msg: "请登录"});

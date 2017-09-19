@@ -47,9 +47,7 @@
   import {createNewBar} from '@/api/theme'
   import $ from 'jquery'
   import {mapGetters} from 'vuex'
-  const DOMAIN = 'http://ow99hkq6k.bkt.clouddn.com/'
-  const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:BhUc4-caxAPcrc-qzC2hPiIIJgk=:eyJzY29wZSI6InBvc3QtYmFyIiwiZGVhZGxpbmUiOjE1MDU4Mjc4Mzh9'
+  import {DOMAIN, HEADTYPE} from '@/common/js/qiniu-config'
   export default {
     data() {
       return {
@@ -65,42 +63,49 @@
     },
     methods: {
       upload(e) {
-        this.isShowLoading = true
-        let file = e.target.files[0]
-        let param = new FormData()
-        param.append('file', file)
-        param.append('token', TOKEN)
         $.ajax({
-          type: 'post',
-          url: 'http://upload.qiniu.com/',
-          data: param,
-          contentType: false,
-          processData: false,
-          async: true,
-          success: (res) => {
-            const newHeadThumb = `${DOMAIN}${res.key}${IMGSTYLE}`
-            this.isShowLoading = false
-            this.barImg = newHeadThumb
+          type: 'get',
+          url: '/qiniu',
+          success: (rToken) => {
+            this.isShowLoading = true
+            let file = e.target.files[0]
+            let param = new FormData()
+            param.append('file', file)
+            param.append('token', rToken.token)
+            $.ajax({
+              type: 'post',
+              url: 'http://upload.qiniu.com/',
+              data: param,
+              contentType: false,
+              processData: false,
+              async: true,
+              success: (res) => {
+                const newHeadThumb = `${DOMAIN}${res.key}${HEADTYPE}`
+                console.log(newHeadThumb)
+                this.isShowLoading = false
+                this.barImg = newHeadThumb
+              }
+            })
           }
         })
       },
       async createBar() {
         if (this.barName !== '' && this.barImg !== '') {
-          const {code, msg} = await createNewBar({
+          const {code, msg, id} = await createNewBar({
             barName: this.barName,
             barImg: this.barImg
           })
           if (code === 1) {
-            this.$store.dispatch('openShowWarn', '创建成功,3秒后返回')
+            this.$store.dispatch('openShowWarn', '创建成功,3秒后跳转')
             setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '创建成功,2秒后返回')
+              this.$store.dispatch('openShowWarn', '创建成功,2秒后跳转')
             }, 1000)
             setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '创建成功,1秒后返回')
+              this.$store.dispatch('openShowWarn', '创建成功,1秒后跳转')
             }, 2000)
             setTimeout(() => {
               this.$store.dispatch('closeShowWarn')
-              this.$router.push('/theme')
+              this.$router.push(`/post_bar/${id}`)
             }, 2500)
           } else {
             this.$store.dispatch('setShowWarn', msg)

@@ -51,7 +51,7 @@
 
 <script type="text/ecmascript-6">
   import VWarn from '@/base/Warn/Warn'
-  import {register, isRegister} from '@/api/user'
+  import {register, isRegister, login} from '@/api/user'
   export default {
     data() {
       return {
@@ -95,31 +95,48 @@
           alert('信息有误')
         }
       },
-      callBack() {
-        const res = register({
+      async callBack() {
+        const {code} = await register({
           user: this.user,
           pwd: this.pwd,
           nickname: this.nickname,
           sex: this.sex,
           birth: this.birth
         })
-        res.then((data) => {
-          if (data.code === 1) {
-            this.$store.dispatch('openShowWarn', '注册成功3秒后跳转')
-            setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '注册成功2秒后跳转')
-            }, 1000)
-            setTimeout(() => {
-              this.$store.dispatch('openShowWarn', '注册成功1秒后跳转')
-            }, 2000)
-            setTimeout(() => {
-              this.$store.dispatch('closeShowWarn')
-              this.$router.push('/login')
-            }, 2500)
-          } else {
-            this.$store.dispatch('setShowWarn', '账户已存在')
-          }
+        if (code === 1) {
+          this.$store.dispatch('openShowWarn', '注册成功3秒后跳转')
+          setTimeout(() => {
+            this.$store.dispatch('openShowWarn', '注册成功2秒后跳转')
+          }, 1000)
+          setTimeout(() => {
+            this.$store.dispatch('openShowWarn', '注册成功1秒后跳转')
+          }, 2000)
+          setTimeout(() => {
+            this.login()
+            this.$store.dispatch('closeShowWarn')
+          }, 2500)
+        } else {
+          this.$store.dispatch('setShowWarn', '账户已存在')
+        }
+      },
+      async login() {
+        const {code, is_login, user_id, user_ifo} = await login({
+          user: this.user,
+          pwd: this.pwd
         })
+        if (code === 0) {
+          this.$store.dispatch('setShowWarn', '账户或密码错误')
+        } else {
+          const loginData = {
+            loginStatus: {
+              isLogin: is_login,
+              userId: user_id
+            },
+            userIfo: user_ifo
+          }
+          this.$store.commit('SET_LOGIN', loginData)
+          this.$router.push('/publish')
+        }
       }
     },
     watch: {

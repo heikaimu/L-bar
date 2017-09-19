@@ -20,9 +20,7 @@
   import {mapGetters} from 'vuex'
   import {changeHeadThumb} from '@/api/user'
   import $ from 'jquery'
-  const DOMAIN = 'http://ow99hkq6k.bkt.clouddn.com/'
-  const IMGSTYLE = '?imageView2/5/w/200/h/200/q/100|imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:BhUc4-caxAPcrc-qzC2hPiIIJgk=:eyJzY29wZSI6InBvc3QtYmFyIiwiZGVhZGxpbmUiOjE1MDU4Mjc4Mzh9'
+  import {DOMAIN, HEADTYPE} from '@/common/js/qiniu-config'
   export default {
     data() {
       return {
@@ -36,29 +34,35 @@
     },
     methods: {
       upload(e) {
-        this.isShowLoading = true
-        let file = e.target.files[0]
-        let param = new FormData()
-        param.append('file', file)
-        param.append('token', TOKEN)
         $.ajax({
-          type: 'post',
-          url: 'http://upload.qiniu.com/',
-          data: param,
-          contentType: false,
-          processData: false,
-          async: true,
-          success: (res) => {
-            const newHeadThumb = `${DOMAIN}${res.key}${IMGSTYLE}`
-            const result = changeHeadThumb(newHeadThumb)
-            result.then((data) => {
-              this.isShowLoading = false
-              const {code, msg} = data
-              if (code === 1) {
-                this.$store.commit('SET_HEAD_THUMB', newHeadThumb)
-                this.$store.dispatch('setShowWarn', '头像修改成功~')
-              } else {
-                this.$store.dispatch('setShowWarn', msg)
+          type: 'get',
+          url: '/qiniu',
+          success: (rToken) => {
+            this.isShowLoading = true
+            let file = e.target.files[0]
+            let param = new FormData()
+            param.append('file', file)
+            param.append('token', rToken.token)
+            $.ajax({
+              type: 'post',
+              url: 'http://upload.qiniu.com/',
+              data: param,
+              contentType: false,
+              processData: false,
+              async: true,
+              success: (res) => {
+                const newHeadThumb = `${DOMAIN}${res.key}${HEADTYPE}`
+                const result = changeHeadThumb(newHeadThumb)
+                result.then((data) => {
+                  this.isShowLoading = false
+                  const {code, msg} = data
+                  if (code === 1) {
+                    this.$store.commit('SET_HEAD_THUMB', newHeadThumb)
+                    this.$store.dispatch('setShowWarn', '头像修改成功~')
+                  } else {
+                    this.$store.dispatch('setShowWarn', msg)
+                  }
+                })
               }
             })
           }

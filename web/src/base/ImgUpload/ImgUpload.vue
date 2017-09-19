@@ -13,9 +13,7 @@
 
 <script type="text/ecmascript-6">
   import $ from 'jquery'
-  const DOMAIN = 'http://ow99hkq6k.bkt.clouddn.com/'
-  const IMGSTYLE = '?imageslim'
-  const TOKEN = 'Kve1h7nvbNMxeP-jnW490r71erSiEKORr0674zXY:BhUc4-caxAPcrc-qzC2hPiIIJgk=:eyJzY29wZSI6InBvc3QtYmFyIiwiZGVhZGxpbmUiOjE1MDU4Mjc4Mzh9'
+  import {DOMAIN, NORMALIMG} from '@/common/js/qiniu-config'
   export default {
     props: ['imgList'],
     data() {
@@ -25,23 +23,29 @@
     },
     methods: {
       uploadImg(e) {
-        this.faceShow = false
-        this.isShowLoading = true
-        let file = e.target.files[0]
-        let param = new FormData()
-        param.append('file', file)
-        param.append('token', TOKEN)
         $.ajax({
-          type: 'post',
-          url: 'http://upload.qiniu.com/',
-          data: param,
-          contentType: false,
-          processData: false,
-          async: true,
-          success: (res) => {
-            const newHeadThumb = `${DOMAIN}${res.key}${IMGSTYLE}`
-            this.$emit('imgUpload', newHeadThumb)
-            this.isShowLoading = false
+          type: 'get',
+          url: '/qiniu',
+          success: (rToken) => {
+            this.faceShow = false
+            this.isShowLoading = true
+            let file = e.target.files[0]
+            let param = new FormData()
+            param.append('file', file)
+            param.append('token', rToken.token)
+            $.ajax({
+              type: 'post',
+              url: 'http://upload.qiniu.com/',
+              data: param,
+              contentType: false,
+              processData: false,
+              async: true,
+              success: (res) => {
+                const newHeadThumb = `${DOMAIN}${res.key}${NORMALIMG}`
+                this.$emit('imgUpload', newHeadThumb)
+                this.isShowLoading = false
+              }
+            })
           }
         })
       },

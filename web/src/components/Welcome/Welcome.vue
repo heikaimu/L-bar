@@ -35,7 +35,7 @@
       position: absolute
       top: 0
       bottom: 60px
-      background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1504582023&di=2567984e95c757e810c96205c6f17286&src=http://imgsrc.baidu.com/forum/pic/item/342ac65c103853431b4930a29313b07ecb8088ab.jpg') no-repeat center center
+      background: url('http://img5.duitang.com/uploads/item/201404/18/20140418223400_UhPn5.thumb.700_0.jpeg') no-repeat center center
       background-size: cover
     .actions
       display: flex
