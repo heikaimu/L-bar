@@ -11,22 +11,8 @@ http://39.108.140.212:3389
 ![](https://github.com/heikaimu/L-bar/raw/master/show/qr.png)
 
 ## 技术栈
-* **Vue2.0**：实现前端页面构建
-* **Vuex**：实现不同组件间的状态共享
-* **Vue-router**：页面路由切换,实现单页的核心
-* **vueg**：页面复杂场景切换效果
-* **vue-lazyload**：图片懒加载
-* **axios**：一个基于 `Promise` 的 HTTP 库，向后端发起请求
-* **ES6**、**ES7**、promise/async/await 处理异步
-* **localStorage**：本地保存用户信息
-* **Webpack**：模块打包，前端项目构建工具首选
-* **stylus**：CSS预处理语言
-* **Flex**：flex弹性布局，简单适配手机、PC端
-* **CSS3**：CSS3过渡动画及样式
-* **BetterScroll**：模拟原生app的列表滚动效果
-* **nodejs**：服务器搭建
-* **MySQL**：MySQL关系型数据库持久化数据（考虑到表与表之间关系复杂，需要多表查询，最复杂的时候是四表查询）
-* **七牛**：图片上传地方三，能方便图片瘦身裁剪等各种功能
+* **前端：Vue栈+ES67+Webpack
+* **后端：nodejs+MySql
 
 ## 使用方式
 
