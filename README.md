@@ -2,7 +2,7 @@
 
 Vue全家桶+nodejs+mysql打造的小贴吧，实现简单的贴吧功能（部分功能还在完善中）
 
-[最新版本的小贴吧GitHub传送门, 更多功能, 更好的用户体验](https://github.com/heikaimu/post-web-app)
+[强烈推荐：最新版本的小贴吧GitHub传送门, 更多功能, 更好的用户体验](https://github.com/heikaimu/post-web-app)
 
 [在线测试地址(谷歌浏览器浏览效果最佳)](http://www.heikaimu.top:3389)
 
